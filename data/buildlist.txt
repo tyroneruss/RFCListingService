@@ -1,0 +1,6 @@
+Nov|7th
+Action|Foreclosure listing site|/fc-final-Nov-01.csv|302
+McCalla & Raymer,LLP|Law Firm|/fc-final-Nov-03.csv|332
+RealtyBid|Foreclosure listing site|/fc-final-Nov-04.csv|120
+Brock & Scott,LLP|Law Firm|/fc-final-Nov-05.csv|56
+180
