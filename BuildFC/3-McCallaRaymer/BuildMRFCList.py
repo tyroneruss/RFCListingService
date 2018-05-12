@@ -16,10 +16,10 @@ def title_except(s, exceptions):
       final.append(word in exceptions and word or word.capitalize())
    return " ".join(final)
 
-def FindMRRecords(Month,filename,saledate1,saledate2):
+def FindMRRecords(Month,filename,Saledate):
 
 	# Add records records by address
-	outputfile = './build/' + Month + '/fc-final-' + Month + '.csv'	
+	outputfile = './build/' + Month + '/fc-temp-' + Month + '.csv'	
 	outfile = open(outputfile,'a+')
 
 	with open(filename, "r") as datefile:
@@ -29,25 +29,32 @@ def FindMRRecords(Month,filename,saledate1,saledate2):
 	i = 0 
 	count = 1
 	list = []
-	
+
 	for line in datalist:
-		if line.find(saledate1) > -1 or line.find(saledate2) > -1:
+		if count == 1:
 			list = line.split(',')
-			Saledate = list[1]
+			# print len(list),' ', list
 			Street 	 = list[2].replace('\xa0','')
 			County 	 = list[3]
 			value = Saledate + ',' + Street
+			#print value
+			
+		if count == 2:
+			location = line.split(',')
+			Address = location[2].split('GA')	
+			if len(Address) > 1:
+				city   = Address[0].rstrip()
+				zip    = Address[1].lstrip()
+				strRecord = value + ',' + city + ',GA,' +  zip  + ',Homeowner,' + County + '\n'
+				#print strRecord
+				outfile.write(strRecord)
 
-		if line.find(saledate1) < 0 and line.find(saledate2) < 0 and line.find('GA') > -1:
-			list = line.split(',')	
-			# print i,': ',list
-			Address = list[2].split('GA')		
-			city   = Address[0].rstrip()
-			zip    = Address[1].lstrip()
-			strRecord = value + ',' + city + ',GA,' +  zip  + ',Homeowner,' + County
-			# print i,': ',strRecord
-			outfile.write(strRecord + '\n')
+		if count == 3:
 			i = i + 1
+			# print i, ': ',strRecord
+			count = 0
+		
+		count = count + 1
 
 			
 	outfile.close()
@@ -58,10 +65,10 @@ def FindMRRecords(Month,filename,saledate1,saledate2):
 def main(argv):
 
 	sum = 0	
+	total = 0
 	
-	Month 	  = sys.argv[1]
-	Saledate1 = sys.argv[2]	
-	Saledate2 = sys.argv[3]	
+	Month    = sys.argv[1]
+	saledate = sys.argv[2]
 
 	# Remove old build file
 	outputfile = './build/' + Month + '/fc-final-' + Month + '.csv'	
@@ -73,26 +80,18 @@ def main(argv):
 		os.makedirs(directory)		
 		
 	print 'Processing build files'
-
-	filename = './data/MCrecords-' + Month + '.csv'
-	sum  =  FindMRRecords(Month,filename,Saledate1,Saledate2)
-
 	print " "
 	print '3 - MaCalla & Raymer '
+
+	filename = './data/MCrecords-' + Month + '.csv'
+	total  =  FindMRRecords(Month,filename,saledate)
+	sum    =  CheckDupList.CheckDup(Month)
 	
 	src  = './build/' + Month + '/fc-final-' + Month + '.csv'
-	dest = '../Final-Build/' + Month + '/fc-final-'  + Month + '-03.csv'		
+	dest = '../Final-Build/' + Month + '/fc-final-' + Month + '-03.csv'
+		
 	shutil.copy2(src,dest) 
-	
-	reportfile = '../Final-Build/' + Month + '/FCreport.csv'
-		# Add  row to final output
-	rptfile = open(reportfile,'a')
-	
-	strRecord = 'McCall & Raymer|' + str(sum) + '|' + 'http://www.foreclosurehotline.net|'  + './3-McCallaRaymer/build/' + Month +  '/fc-final-' + Month + '.csv'
-	rptfile.write(strRecord + '\n')
-	
-  	print "Total number of records found on the McCall & Raymer site: ", sum
-	
+
 # Initiate main program	
 if __name__ == "__main__":
     main(sys.argv)

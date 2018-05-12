@@ -78,8 +78,11 @@ def ScrapeForeHtml(salemonth,county,saledate):
 								length  = len(namelist)
 								FullName = namelist[length-1]														
 							elif FullName.find('Jt.') > -1 or FullName.find('Sr.') > -1 or FullName.find('IIi') > -1 or FullName.find('IIi') > -1:									   
-								namelist = FullName.split(',')
-								FullName = namelist[1]														
+								namelist = FullName.split(',') 
+								if len(namelist) > 1:
+									FullName = namelist[1]	
+								else:
+									FullName  = "Homeowner"	
 							elif FullName.find('Inc') > -1 or FullName.find('Llc') > -1:									   
 								# print 'This string includes Inc'								
 								x = x + 1

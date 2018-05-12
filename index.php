@@ -6,4 +6,4 @@
  * and open the template in the editor.
  */
 
-header('Location: ./user/login.php'); 
+header('Location: ./mailer/fcsources.php'); 

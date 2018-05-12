@@ -21,7 +21,7 @@
                      </td>
                 </tr>   
                <tr>
-                      <td colspan="2" id="right_pane_title" align="center" valign="center" > 
+                      <td height="60" colspan="2" id="right_pane_title" align="center" valign="center" > 
                           <b>Build Mailer List</b>
                      </td>
                 </tr>   
@@ -33,36 +33,11 @@
                          &nbsp;&nbsp;Foreclosure Mailer
                      </td>
                 </tr>   
-               <tr>
-                      <td colspan="2" id="right_pane_title" align="center" valign="center" > 
-                          <b>Key Performance Indicators</b>
+                <tr>
+                     <td width='20%' height='120' align="center" > 
                      </td>
-                </tr>   
-                <tr  style="background-color: #FFFFFF;">
-                     <td width='20%' height='5' align="center"> 
-                         <img src="../images/AddCreditor.gif" width="40px" height="40px" alt="AddCreditor"/>
-                     </td>
-                     <td width='80%' style="color: #660000; font-family: Times New Roman; font-size: 18px;" style="background-color: #FFFFFF;"> 
-                         <a href="../kpis/kpi_loanmod_stats.php" style="color: #660000; ">
-                             &nbsp;&nbsp;Leads to Clients Statistics</a>
-                     </td>
-                </tr>   
-                <tr  style="background-color: #FFFFFF;">
-                     <td width='20%' height='5' align="center" > 
-                         <img src="../images/Offer_Eval.png" width="40px" height="40px" alt="AddCreditor"/>
-                     </td>
-                     <td width='80%' style="color: #660000; font-family: Times New Roman; font-size: 18px;" > 
-                         <a href="../kpis/kpi_refunds.php" style="color: #660000">
-                             &nbsp;&nbsp;Refund/Chargebacks</a>                       
-                     </td>
-                </tr>   
-                <tr  style="background-color: #FFFFFF;">
-                     <td width='20%' height='5' align="center" > 
-                         <img src="../images/CreditCard.gif" width="40px" height="40px" alt="AddCreditor"/>
-                     </td>
-                     <td width='80%' style="color: #660000; font-family: Times New Roman; font-size: 18px;" > 
-                         <a href="../kpis/kpi_mailers.php" style="color: #660000">
-                             &nbsp;&nbsp;Mailers - Matrices</a>                        
+                     <td width='80%' style="font-family: Times New Roman; font-size: 18px;" > 
+                         <br><br><br>
                      </td>
                 </tr>   
                 <tr>

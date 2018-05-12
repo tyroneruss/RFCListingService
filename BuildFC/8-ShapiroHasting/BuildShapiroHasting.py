@@ -31,7 +31,7 @@ def CreateList(salemonth):
 	typelist = data.splitlines()
 	
 	# Build check for duplicate record in list 
-	k=1
+
 	i=0
 	
 	# Remove dupliacte records by address
@@ -42,17 +42,18 @@ def CreateList(salemonth):
 	with open(filepath,"r") as infile:
 		for line in infile:
 			list = line.split(",")
-			saledate = list[0]
-			county	 = list[1]
-			location = list[2]			
-			zipcode  = list[4].replace('\n','')
+			saledate = list[1]
+			county	 = list[2]
+			location = list[3]			
+			location = location.replace('"','')			
+			zipcode  = list[5].replace('\n','')
 			Street,City = SplitLocation(location,typelist)
 			if City != '':
 				strRecord = saledate + ',' + Street + ',' + City + ',GA,' + str(zipcode) + ',Homeowner,' + county
 				i = i  + 1
-				# print i,': ',strRecord
+				#print i,': ',strRecord
 				outfile.write(strRecord + '\n')
-
+			
 	infile.close()
 	outfile.close()
 	

@@ -55,9 +55,8 @@ def CheckDup(month):
 	l = l + 1
 	# print "\n\nFile being scan for duplicates: ",srcfile	
 	print "\nTotal number of records found: ",l
-	print "\nTotal duplicate: ", k
-	print "\nTotal records without names: ",i
-	print "\nTotal records with names: ", l - k
+	print "\nTotal duplicates removed: ", k
+	print "\nTotal records found on this site: ", l - k
 	
 
 	infile.close()

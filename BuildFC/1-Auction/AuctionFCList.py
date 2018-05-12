@@ -14,7 +14,15 @@ def title_except(s, exceptions):
  
 def FindFCRecords(Saledate,State,Month,year):
 
-	inputfile = 'data/' + Month + '/Auction.txt'
+	builddir = './build/' + Month 
+	if not os.path.exists(builddir):
+		os.makedirs(builddir)		
+
+	datadir = './data/' + Month 
+	if not os.path.exists(datadir):
+		os.makedirs(datadir)	
+		
+	inputfile = 'data/' + Month + '/auction.txt'
 	
 	# Remove dupliacte records by address
 	outputfile =  './build/' + Month + '/fc-final-' + Month + ".csv"

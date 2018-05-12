@@ -29,7 +29,7 @@ def SplitLocation(Location,StreetType):
 		
 	return street,city
 
-def AddRecords(salemonth):
+def AddRecords(salemonth,saledate):
 
 	StreetTypefile = 'data/StreetType.txt'	
 
@@ -37,7 +37,7 @@ def AddRecords(salemonth):
 		data = datefile.read()  # Read the contents of the file into memory.
 	typelist = data.splitlines()
 
-	fclistpath = './data/' + salemonth + '/BrockScott.txt'
+	fclistpath = './data/' + salemonth + '/BrockScott.csv'
 
 	# Build check for duplicate record in list 
 	k=0
@@ -54,31 +54,27 @@ def AddRecords(salemonth):
 	with open(fclistpath) as infile:
 		for line in infile:
 			line = line.replace('\n','')
-						
-			if count == county_num:
-				county_num = county_num + 15 
-				county = line		
-							
-			# Saledate
-			if count == saledate_num:
-				datearray = line.split(' ')
-				Saledate  = datearray[0]
-				saledate_num = saledate_num + 15
-				# print county,' ',Saledate
-				
+		
 			if line.find('Georgia')  > -1:
 				location = line.split(',')
 				Address  = location[0]
 				Zip		 = location[1].split(' ')
+				if len(Zip) > 2:
+					zip = Zip[2].replace('"','')
 				 
-				Street,City = SplitLocation(Address,typelist)			
-				strRecord = Saledate + ',' + Street + ',' + City + ','  + ',GA,' + str(Zip[2]) + ',Homeowner,' + county + '\n'
-				i = i + 1
-				#print i,': ',strRecord
-				outfile.write(strRecord)
+					Street,City = SplitLocation(Address,typelist)		
+					street = Street.replace('"','')
+					city = City.replace('"','')		
+					city = city.replace('Northwest ','')		
+					city = city.replace('Northeast ','')		
+					city = city.replace('Southwest ','')		
+					city = city.replace('Southeast ','')		
+					
+					strRecord = saledate + ',' + street + ',' + city + ',GA,' + str(zip) + ',Homeowner\n'
+					i = i + 1
+					#print i,': ',strRecord
+					outfile.write(strRecord)
 				
-				
-			count = count + 1
 	
 	infile.close()
 	outfile.close()	
@@ -89,7 +85,8 @@ def main(argv):
 	# Read data from Aldp
 	try:
 	
-		month  = sys.argv[1]
+		month  	  = sys.argv[1]
+		saledate  = sys.argv[2]
 		sum = 0
 
 		filename = './build/' + month + '/fc-final-' + month + '.csv'
@@ -101,7 +98,7 @@ def main(argv):
 		if not os.path.exists(directory):
 			os.makedirs(directory)		
 		
-		sum = AddRecords(month)	
+		sum = AddRecords(month,saledate)	
 		print "5: Brack & Scoot"
 		print ""
 		print "The total number of records found on : ",sum

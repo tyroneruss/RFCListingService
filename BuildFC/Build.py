@@ -65,8 +65,7 @@ def main(argv):
 
 	# 3 - McCalla Raymer MRFCList - Foreclosure Hotline
 	os.chdir(V_ScriptPathMRFCList)
-	RunScript = 'python BuildMRFCList.py ' + V_Month  + ' ' + V_Saledate1 + ' ' + V_Saledate2
-
+	RunScript = 'python BuildMRFCList.py ' + V_Month  + ' ' + V_Saledate1
 	os.system(RunScript)
 	print " "
 	print " "
@@ -83,7 +82,7 @@ def main(argv):
 	# 5 - Brock Scott  listings - ['\t']
 	os.chdir( V_ScriptPathBrockScott )
 	V_SriptName = 'BrockScott.py'
-	RunScript = 'python ' + V_SriptName + ' ' + V_Month
+	RunScript = 'python ' + V_SriptName + ' ' + V_Month + ' ' + V_Saledate1
 	os.system(RunScript)
 	print " "
 	print " "
@@ -118,7 +117,7 @@ def main(argv):
 	# 9 - MartinBrunavs site
 	os.chdir(V_ScriptPathMartinBrunavs)
 	RunScript = 'python BuildMartinBrunavs.py ' + V_Month + ' ' + V_Saledate1
-	os.system(RunScript)
+	#os.system(RunScript)
 	print " "
 	print " "
 	os.chdir( '../' )

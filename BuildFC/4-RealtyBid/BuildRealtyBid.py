@@ -23,14 +23,14 @@ def ScrapeForeHtml(page,state,month,saledate):
 	
 	outfile = open(filename,'a')
 		
-	URL = 'https://www.realtybid.com/search-results?page=' + str(page) + '&q=' + state + '&br=0&ba=0&st=4'
+	URL = 'https://www.realtybid.com/search-results.cfm?page=' + str(page) + '&&q=GA&br=&ba=&st=&s=&ss=&pmin=&pmax='
 	
 	# Read data from URLforeclosure
 	r = requests.get(URL)
 	  		
 	soup = BeautifulSoup(r.text,'lxml')
 
-	# pri nt soup
+	# print soup
 	x = 0
 	i = 0
 	location = {}
@@ -40,14 +40,14 @@ def ScrapeForeHtml(page,state,month,saledate):
 		street = lineArray[4].split('</span')
 		citystzip = lineArray[5].split('</div')
 		location  = citystzip[0].split(',')
-		city = location[0].replace('\\n','')
+		city = location[0].replace('\\r\\n','')
 		newcity = city.lstrip()
 		zip = re.findall('\\d+', location[1])		
 		zipcode = zip[0] 
 		county = CountyLookup.FindCounty(newcity)
+		county = county.replace('\n','')
 		address = saledate + ',' +street[0] + ',' + newcity + ',' +  state  + ',' + zipcode + ',Homeowner,'  + county
-		# print i,address
-		outfile.write(address)
+		outfile.write(address + '\n')
 		i = i + 1
 
 	return i

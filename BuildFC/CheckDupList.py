@@ -44,6 +44,9 @@ def CheckDup(salemonth):
 					k=k+1
 				else:		
 					seen.add(address)
+					array_fc = line.split(",")					
+					array_fc[2] = title_except(array_fc[2], "")					
+					build_list =  ','.join(array_fc)
 					outfile.write(line)
 					t=t+1
 					if "Homeowner" not in line:
