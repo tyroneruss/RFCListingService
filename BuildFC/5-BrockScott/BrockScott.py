@@ -37,7 +37,7 @@ def AddRecords(salemonth,saledate):
 		data = datefile.read()  # Read the contents of the file into memory.
 	typelist = data.splitlines()
 
-	fclistpath = './data/' + salemonth + '/BrockScott.csv'
+	fclistpath = './data/' + salemonth + '/brockscott.csv'
 
 	# Build check for duplicate record in list 
 	k=0
